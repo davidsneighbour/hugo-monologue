@@ -1,6 +1,6 @@
 {
   "name": "hugo-monologue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "## Features",
   "main": "index.js",
   "scripts": {
