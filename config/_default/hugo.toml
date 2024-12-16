@@ -1,7 +1,4 @@
-baseURL = 'https://kollitsch.me/'
 languageCode = 'en-US'
-title = 'kollitsch.me'
-theme = ['monologue']
 
 [[menus.main]]
 name = 'Home'
@@ -12,11 +9,6 @@ weight = 10
 name = 'Posts'
 pageRef = '/posts'
 weight = 20
-
-[module]
-[module.hugoVersion]
-extended = false
-min = "0.116.0"
 
 [outputs]
 home = ['html']

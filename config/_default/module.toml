@@ -1,3 +1,7 @@
+[hugoVersion]
+extended = false
+min = "0.116.0"
+
 [[imports]]
 path = "github.com/davidsneighbour/hugo-modules/modules/debug"
 disable = false

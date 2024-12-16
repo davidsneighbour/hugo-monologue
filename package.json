@@ -1,0 +1,15 @@
+{
+  "name": "hugo-monologue",
+  "version": "0.0.1",
+  "description": "## Features",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "Patrick Kollitsch <patrick@davids-neighbour.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@davidsneighbour/markdownlint-config": "2024.4.12",
+    "@davidsneighbour/remark-config": "2024.4.12"
+  }
+}
