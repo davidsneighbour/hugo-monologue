@@ -12,6 +12,6 @@
     "@davidsneighbour/remark-config": "2024.4.12"
   },
   "devDependencies": {
-    "@apidevtools/json-schema-ref-parser": ">=11.2.0"
+    "@apidevtools/json-schema-ref-parser": ">=11.1.1"
   }
 }
