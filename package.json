@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@davidsneighbour/markdownlint-config": "2024.4.12",
+    "@davidsneighbour/release-config": "^2024.4.12",
     "@davidsneighbour/remark-config": "2024.4.12",
     "@davidsneighbour/tools": "2024.4.12"
   },
