@@ -1,0 +1,20 @@
+[[imports]]
+path = "github.com/davidsneighbour/hugo-modules/modules/debug"
+disable = false
+ignoreConfig = false
+ignoreImports = false
+
+[[imports]]
+path = "github.com/davidsneighbour/hugo-modules/modules/hooks"
+disable = false
+ignoreConfig = false
+ignoreImports = false
+
+################################################################################
+
+[[imports]]
+path = "github.com/davidsneighbour/hugo-modules/modules/head"
+disable = false
+ignoreConfig = false
+ignoreImports = false
+
