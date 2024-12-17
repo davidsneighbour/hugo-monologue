@@ -1,0 +1,3 @@
+[dnb.head.styles]
+# external, postcss, tailwind
+entrypoint = "css/main.css"

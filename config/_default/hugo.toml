@@ -17,3 +17,9 @@ rss = ['rss']
 section = ['html']
 taxonomy = ['html']
 term = ['html']
+
+[permalinks]
+[permalinks.page]
+posts = '/:year/:month/:day/'
+[permalinks.section]
+posts = '/:year/'

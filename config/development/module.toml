@@ -1,3 +1,6 @@
+_merge = "deep"
+replacements = "github.com/davidsneighbour/hugo-monologue -> ../../hugo-monologue,github.com/davidsneighbour/hugo-modules/modules/head -> ../../hugo-modules/modules/head,github.com/davidsneighbour/hugo-modules/modules/functions -> ../../hugo-modules/modules/functions,github.com/davidsneighbour/hugo-modules/modules/hooks -> ../../hugo-modules/modules/hooks,github.com/davidsneighbour/hugo-modules/modules/debug -> ../../hugo-modules/modules/debug"
+
 [hugoVersion]
 extended = false
 min = "0.116.0"
