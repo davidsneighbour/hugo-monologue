@@ -1,17 +1,75 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
-<head>
-  {{ partial "head.html" . }}
-</head>
-<body>
-  <header>
-    {{ partial "header.html" . }}
-  </header>
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
-</body>
+{{- $config := site.Params.dnb.theme -}}
+{{- partials.Include "init.html" . -}}
+{{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "setup" "context" . ) -}}
+{{- $sitelang := site.LanguageCode | compare.Default "en-US" -}}
+{{- $classes := partials.IncludeCached "func/getBodyClasses.html" . . -}}
+<html lang="{{- $sitelang -}}" data-bs-theme="{{- site.Params.dnb.theme.colorscheme -}}">
+  {{- /* MARK: Head
+  */ -}}
+  <head>
+    {{- /* loading head module, see https://dnbhub.xyz/head/ */ -}}
+    {{- partials.Include "head.html" . -}}
+  </head>
+  {{- /* MARK: Body
+  */ -}}
+  <body class="{{- $classes }} nav-state1 scroll" id="top">
+    <a class="visually-hidden-focusable skip-to-main-link" href="#maincontent">
+      {{- lang.Translate "theme.skip_to_content" -}}
+    </a>
+    <section class="section--sitetitle" aria-role="banner">
+      <div class="container">
+        <div class="site-title ff-headline">
+          <a href="{{- site.BaseURL -}}">{{- site.Title -}}</a>
+        </div>
+        {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "post-sitetitle" "context" . ) -}}
+			</div>
+    </section>
+    {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-start" "context" . ) -}}
+    {{- /* MARK: Main Content
+    */ -}}
+    {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-pre-main" "context" . ) -}}
+    <main id="maincontent" tabindex="-1">
+      {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-main-start" "context" . ) -}}
+      {{- block "main" . -}}{{- end -}}
+      {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-main-end" "context" . ) -}}
+    </main>
+    {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-post-main" "context" . ) -}}
+    {{- if templates.Exists "partials/schema.html" -}}
+      {{- partials.Include "schema.html" . . -}}
+    {{- end -}}
+    {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "footer-post" "context" . ) -}}
+    {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-end-pre-script" "context" . ) -}}
+    {{- $buildoptions := site.Params.dnb.theme.jsbuild.options -}}
+    {{- $params := dict }}
+    {{- with resources.Get "data/build.json" -}}
+      {{- $params = dict "params" (transform.Unmarshal .Content) -}}
+    {{- end -}}
+    {{- $buildoptions = collections.Merge $buildoptions $params -}}
+    {{- $scripts := resources.Get (site.Params.dnb.theme.js.entrypoint | default "js/script.js") |
+          js.Build (
+            collections.Merge $buildoptions (collections.Dictionary "targetPath" "assets/js/script.js")
+          ) | resources.Fingerprint "sha512"
+    -}}
+    <script src="{{- $scripts.Permalink -}}" async fetchpriority="high" defer integrity="{{- $scripts.Data.Integrity -}}"></script>
+    {{- with resources.Get "js/main.js" -}}
+      {{- $script := . | resources.ExecuteAsTemplate "plugins.js" . -}}
+      {{- $script = $script |
+            js.Build (
+              collections.Merge $buildoptions (collections.Dictionary "targetPath" "assets/js/main.js")
+            ) | resources.Fingerprint "sha512" -}}
+      <script src="{{- $script.Permalink -}}" async fetchpriority="high" defer integrity="{{- $script.Data.Integrity -}}"></script>
+    {{- else -}}
+      {{- partials.Include "debug-cli.html" (dict
+            "message" "[modder] js/main.js missing, module modder is probably not configured properly"
+            "context" .
+            "severity" "warn"
+            "level" 8
+      ) -}}
+    {{- end -}}
+    {{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "body-end" "context" . ) -}}
+    <a href="javascript:history.back();" data-hotkey="k+ArrowLeft" class="d-none">Back</a>
+    <a href="javascript:history.forward();" data-hotkey="k+ArrowRight" class="d-none">Forward</a>
+  </body>
 </html>
+{{- partials.Include "func/hook.html" ( collections.Dictionary "hook" "teardown" "context" . ) -}}
