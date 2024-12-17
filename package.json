@@ -1,6 +1,6 @@
 {
   "name": "hugo-monologue",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A GoHugo theme for daily (b)logging.",
   "main": "index.js",
   "scripts": {
