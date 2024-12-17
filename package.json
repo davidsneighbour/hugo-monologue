@@ -1,7 +1,7 @@
 {
   "name": "hugo-monologue",
   "version": "0.0.2",
-  "description": "## Features",
+  "description": "A GoHugo theme for daily (b)logging.",
   "main": "index.js",
   "scripts": {
     "release": "wireit"
@@ -11,9 +11,10 @@
   "license": "MIT",
   "dependencies": {
     "@davidsneighbour/markdownlint-config": "2024.4.12",
-    "@davidsneighbour/release-config": "^2024.4.12",
+    "@davidsneighbour/release-config": "2024.4.12",
     "@davidsneighbour/remark-config": "2024.4.12",
-    "@davidsneighbour/tools": "2024.4.12"
+    "@davidsneighbour/tools": "2024.4.12",
+    "postcss": "8.4.49"
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": ">=11.7.3"
